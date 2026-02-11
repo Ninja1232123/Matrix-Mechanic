@@ -1,5 +1,5 @@
-###AI TRAINING FOR DUMDUMS
-
+***AI TRAINING FOR DUMDUMS***
+**BUTTONS AND KNOBS CONFIGURATION FOR AI ARCHITECTURE DURING FINE-TUNING**
 This directory contains the original AI-Training-For-DumDums codebase components that were not part of the π/2 quantization focus.
 
 ## What's Here
