@@ -1,0 +1,15 @@
+LICENSE
+README.md
+pyproject.toml
+devnarrative/__init__.py
+devnarrative/analyzer.py
+devnarrative/cli.py
+devnarrative/models.py
+devnarrative/sessions.py
+devnarrative/story.py
+devnarrative.egg-info/PKG-INFO
+devnarrative.egg-info/SOURCES.txt
+devnarrative.egg-info/dependency_links.txt
+devnarrative.egg-info/entry_points.txt
+devnarrative.egg-info/requires.txt
+devnarrative.egg-info/top_level.txt

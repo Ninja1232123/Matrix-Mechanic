@@ -1,0 +1,397 @@
+# DevNarrative - Developer Narrative Logger
+
+Transform your git history into compelling human stories. Perfect for standups, retrospectives, and understanding what really happened.
+
+## 🌟 The Problem
+
+Looking at git history is like reading raw machine logs:
+```
+a3f7d2c fix bug
+b8e4f1a update tests
+c9d2a8f refactor
+```
+
+**What actually happened?** What were you working on? What challenges did you face? What did you learn?
+
+## 🚀 DevNarrative Solves This
+
+Automatically generates readable stories from your development work:
+
+```
+📖 Tuesday, November 5, 2025
+
+Morning Session (9:15 AM - 12:30 PM)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🎯 Main Focus: User Authentication System
+
+You started the day by implementing JWT token validation. After
+encountering issues with token expiration, you refactored the refresh
+token logic and added comprehensive error handling.
+
+📝 Commits: 8 commits, 342 lines added, 89 lines deleted
+🐛 Challenges: Fixed token refresh race condition
+✨ Achievements: Complete auth flow with tests
+
+Afternoon Session (2:00 PM - 5:45 PM)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🎯 Main Focus: Database Schema Migration
+
+You tackled the user roles migration, creating new tables and updating
+relationships. The process involved careful planning to avoid data loss
+and required rolling back once before getting it right.
+
+📝 Commits: 5 commits, 156 lines added, 23 lines deleted
+🔧 Technical: Migration scripts + rollback procedures
+```
+
+## ✨ Features
+
+### Story Generation
+- **Daily Stories**: What you accomplished today
+- **Weekly Summaries**: Your week in development
+- **Feature Stories**: Complete narrative of a feature's development
+- **Sprint Reports**: Automatically generated sprint summaries
+- **Commit Stories**: Turn commit history into prose
+
+### Intelligent Analysis
+- **Session Detection**: Groups commits into work sessions
+- **Pattern Recognition**: Identifies bug fixes, features, refactors
+- **Challenge Detection**: Spots when you struggled (reverts, many attempts)
+- **Impact Analysis**: Measures code changes and affected files
+- **Collaboration**: Tracks work with teammates
+
+### Beautiful Output
+- **Markdown**: Export for documentation
+- **Terminal**: Beautiful rich terminal output
+- **HTML**: Share-friendly web pages
+- **JSON**: For integrations and tools
+- **Slack/Discord**: Ready for team channels
+
+## 🎯 Use Cases
+
+### 1. Daily Standups
+```bash
+# Generate today's story
+devnarrative today
+
+# Output:
+# - What you worked on
+# - Key achievements
+# - Blockers encountered
+# - Lines of code changed
+```
+
+### 2. Weekly Retrospectives
+```bash
+# Get this week's summary
+devnarrative week
+
+# Perfect for:
+# - Team retrospectives
+# - Manager updates
+# - Personal reflection
+```
+
+### 3. Feature Documentation
+```bash
+# Story of how a feature was built
+devnarrative feature "user-authentication"
+
+# Includes:
+# - Development timeline
+# - Key decisions
+# - Challenges faced
+# - Final implementation
+```
+
+### 4. Pull Request Descriptions
+```bash
+# Generate PR description from commits
+devnarrative pr main..feature-branch
+
+# Auto-generates:
+# - Summary of changes
+# - List of commits
+# - Files affected
+# - Testing notes
+```
+
+### 5. Personal Dev Journal
+```bash
+# Keep a development journal
+devnarrative journal
+
+# Track:
+# - Daily progress
+# - Learning moments
+# - Technical decisions
+# - Problem-solving approaches
+```
+
+## 🚀 Quick Start
+
+### Installation
+```bash
+cd devnarrative
+pip install -e .
+```
+
+### Basic Usage
+
+```bash
+# Initialize in your repo
+devnarrative init
+
+# Get today's story
+devnarrative today
+
+# Get this week's summary
+devnarrative week
+
+# Story of a specific feature
+devnarrative feature "feature-name"
+
+# Generate from date range
+devnarrative range --from "2025-11-01" --to "2025-11-05"
+
+# Export to markdown
+devnarrative today --export story.md
+
+# Custom format
+devnarrative today --format slack
+```
+
+## 📖 Story Types
+
+### Daily Story
+```bash
+devnarrative today
+```
+Shows:
+- Work sessions (morning/afternoon/evening)
+- Main focus areas
+- Commits and changes
+- Challenges encountered
+- Key achievements
+
+### Weekly Summary
+```bash
+devnarrative week
+```
+Shows:
+- Day-by-day highlights
+- Total commits and changes
+- Major features completed
+- Patterns and trends
+- Collaboration stats
+
+### Feature Story
+```bash
+devnarrative feature "auth-system"
+```
+Shows:
+- Complete feature timeline
+- Development phases
+- Key commits
+- Technical decisions
+- Final state
+
+### Sprint Report
+```bash
+devnarrative sprint --sprint-number 42
+```
+Shows:
+- Sprint goals vs achievements
+- Velocity and burndown
+- Team contributions
+- Blockers and resolutions
+
+### Commit Story
+```bash
+devnarrative commit a3f7d2c
+```
+Shows:
+- What changed
+- Why it changed
+- Impact analysis
+- Related commits
+
+## 🎨 Output Formats
+
+### Terminal (Default)
+Beautiful rich terminal output with:
+- Colors and formatting
+- Emoji indicators
+- Progress bars
+- Tables and charts
+
+### Markdown
+```bash
+devnarrative today --format markdown
+```
+Perfect for:
+- README updates
+- Documentation
+- Wikis
+- GitHub/GitLab
+
+### HTML
+```bash
+devnarrative week --format html > report.html
+```
+Creates shareable web pages with:
+- Styling and navigation
+- Interactive charts
+- Copy-friendly text
+
+### JSON
+```bash
+devnarrative today --format json
+```
+For integrations with:
+- CI/CD pipelines
+- Analytics tools
+- Custom dashboards
+
+### Slack/Discord
+```bash
+devnarrative today --format slack
+```
+Formatted for team chat:
+- Proper message formatting
+- Thread-friendly
+- Emoji and mentions
+
+## 🔧 Configuration
+
+Create `.devnarrative.json`:
+
+```json
+{
+  "author": {
+    "name": "Your Name",
+    "email": "you@example.com"
+  },
+  "work_hours": {
+    "start": "09:00",
+    "end": "17:00"
+  },
+  "session_gap_minutes": 60,
+  "story_style": "detailed",
+  "exclude_patterns": [
+    "Merge branch",
+    "WIP",
+    "typo"
+  ],
+  "categories": {
+    "feature": ["feat", "add", "implement"],
+    "bugfix": ["fix", "bug", "issue"],
+    "refactor": ["refactor", "cleanup", "optimize"]
+  }
+}
+```
+
+## 💡 Smart Features
+
+### Session Detection
+Automatically groups commits into work sessions based on:
+- Time gaps between commits
+- Work patterns
+- Branch changes
+- Context switches
+
+### Pattern Recognition
+Identifies:
+- **Features**: New functionality being added
+- **Bug Fixes**: Problems being solved
+- **Refactoring**: Code improvements
+- **Testing**: Test additions/changes
+- **Documentation**: Doc updates
+
+### Challenge Detection
+Spots difficulties:
+- Multiple attempts at same file
+- Reverts and rollbacks
+- Long debugging sessions
+- Complex merge conflicts
+
+### Impact Analysis
+Measures:
+- Lines of code changed
+- Files affected
+- Modules touched
+- Test coverage changes
+
+## 📊 Example Outputs
+
+### Daily Story
+```
+📖 Your Development Story - November 5, 2025
+
+Morning Focus: User Authentication 🔐
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Started at 9:15 AM
+
+You began by implementing JWT token validation, creating a secure
+authentication flow. After discovering a race condition in the token
+refresh logic, you spent time debugging and eventually refactored
+the entire refresh mechanism.
+
+Key Changes:
+  • Added JWT validation middleware
+  • Implemented refresh token rotation
+  • Fixed concurrent token refresh bug
+
+Stats: 8 commits | +342 -89 lines | 4 files changed
+
+Afternoon: Database Migrations 🗄️
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Started at 2:00 PM
+
+Tackled the user roles migration. First attempt failed due to foreign
+key constraints, requiring a rollback. Second attempt succeeded after
+carefully planning the migration order.
+
+Key Changes:
+  • Created user_roles table
+  • Updated foreign key relationships
+  • Added rollback procedures
+
+Stats: 5 commits | +156 -23 lines | 3 files changed
+
+Daily Summary
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📊 Total Activity: 13 commits | +498 -112 lines
+⏱️  Active Time: 6.5 hours
+🎯 Main Achievement: Complete auth system with database foundation
+💪 Challenges Overcome: Token race condition, migration complexity
+```
+
+## 🛠️ Technology Stack
+
+- **Git Analysis**: GitPython for repo interaction
+- **NLP**: Basic text processing for commit message understanding
+- **Formatting**: Rich for beautiful terminal output
+- **Storage**: SQLite for caching and history
+- **CLI**: Click for command interface
+
+## 🎯 Perfect For
+
+- **Developers**: Track your own progress
+- **Teams**: Share what you accomplished
+- **Managers**: Understand team work without micromanaging
+- **Retrospectives**: Objective data about what happened
+- **Documentation**: Auto-generate change logs
+- **Learning**: Reflect on your development journey
+
+## 🤝 Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md)
+
+## 📄 License
+
+MIT License - See [LICENSE](LICENSE)
+
+---
+
+**Tell your development story** 📖✨
