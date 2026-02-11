@@ -1,0 +1,44 @@
+import numpy as np
+
+# XOR problem: inputs and targets
+X = np.array([[0, 0], [0, 1], [1, 0], [1, 1]])
+y = np.array([[1, 0], [0, 1], [0, 1], [1, 0]])  # One-hot encoded
+
+# Initialize weights and biases
+W1 = np.random.randn(2, 4) * 0.1
+W2 = np.random.randn(4, 2) * 0.1
+b1 = np.zeros(4)
+b2 = np.zeros(2)
+
+# Training loop
+for epoch in range(10000):
+    # Forward pass
+    h = np.maximum(X @ W1 + b1, 0)  # ReLU
+    y_pred = np.exp(h @ W2 + b2) / np.sum(np.exp(h @ W2 + b2), axis=1, keepdims=True)  # Softmax
+
+    # Loss (cross-entropy)
+    loss = -np.mean(y * np.log(y_pred + 1e-10))
+
+    # Backward pass (gradients)
+    dW2 = h.T @ (y_pred - y) / len(X)
+    db2 = np.sum(y_pred - y, axis=0) / len(X)
+    dh = (y_pred - y) @ W2.T
+    dW1 = X.T @ (dh * (h > 0)) / len(X)
+    db1 = np.sum(dh * (h > 0), axis=0) / len(X)
+
+    # Update weights
+    W1 -= 0.1 * dW1
+    W2 -= 0.1 * dW2
+    b1 -= 0.1 * db1
+    b2 -= 0.1 * db2
+
+    if epoch % 1000 == 0:
+        print(f"Epoch {epoch}, Loss: {loss:.4f}")
+
+# Test the trained network
+h = np.maximum(X @ W1 + b1, 0)
+y_pred = np.exp(h @ W2 + b2) / np.sum(np.exp(h @ W2 + b2), axis=1, keepdims=True)
+print("\nPredictions:")
+for i in range(len(X)):
+    print(f"{X[i]} -> {np.argmax(y_pred[i])} (expected: {np.argmax(y[i])})")
+
