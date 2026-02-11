@@ -1,0 +1,76 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "speed-guardian"
+version = "1.0.0"
+description = "Automatic performance profiler and optimizer for Python code"
+readme = "README.md"
+requires-python = ">=3.8"
+license = {text = "MIT"}
+authors = [
+    {name = "Codes-Masterpiece", email = "codes@masterpiece.dev"}
+]
+keywords = ["performance", "profiler", "optimizer", "bottleneck", "speed"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Topic :: Software Development :: Quality Assurance",
+    "Topic :: Software Development :: Testing",
+]
+
+dependencies = [
+    "click>=8.0.0",
+    "rich>=13.0.0",
+    "textual>=0.47.0",
+    "psutil>=5.9.0",
+    "memory_profiler>=0.61.0",
+    "line_profiler>=4.0.0",
+    "py-spy>=0.3.14",
+    "gitpython>=3.1.0",
+    "matplotlib>=3.5.0",
+    "sqlalchemy>=2.0.0",
+    "pyyaml>=6.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-cov>=4.0.0",
+    "black>=23.0.0",
+    "mypy>=1.0.0",
+    "ruff>=0.1.0",
+]
+
+[project.scripts]
+speed-guardian = "speed_guardian.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/Ninja1232123/Codes-Masterpiece"
+Documentation = "https://github.com/Ninja1232123/Codes-Masterpiece/tree/main/speed-guardian"
+Repository = "https://github.com/Ninja1232123/Codes-Masterpiece"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["speed_guardian*"]
+
+[tool.black]
+line-length = 100
+target-version = ['py38', 'py39', 'py310', 'py311']
+
+[tool.mypy]
+python_version = "3.8"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = false
+
+[tool.ruff]
+line-length = 100
+target-version = "py38"
