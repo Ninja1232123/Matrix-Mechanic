@@ -1,0 +1,14 @@
+LICENSE
+README.md
+pyproject.toml
+codearchaeology/__init__.py
+codearchaeology/analyzer.py
+codearchaeology/cli.py
+codearchaeology/models.py
+codearchaeology/visualizer.py
+codearchaeology.egg-info/PKG-INFO
+codearchaeology.egg-info/SOURCES.txt
+codearchaeology.egg-info/dependency_links.txt
+codearchaeology.egg-info/entry_points.txt
+codearchaeology.egg-info/requires.txt
+codearchaeology.egg-info/top_level.txt

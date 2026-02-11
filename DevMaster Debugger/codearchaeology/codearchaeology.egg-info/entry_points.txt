@@ -1,0 +1,2 @@
+[console_scripts]
+codearch = codearchaeology.cli:main

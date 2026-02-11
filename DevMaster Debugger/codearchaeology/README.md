@@ -1,0 +1,436 @@
+# CodeArchaeology - Dig Through Your Code's History
+
+Uncover the hidden stories in your codebase. Understand how your code evolved, discover patterns, find hotspots, and learn from the past.
+
+## 🏛️ The Problem
+
+Your codebase has a history, but it's buried in thousands of commits:
+- Which code is fragile and changes constantly?
+- What experiments were tried and abandoned?
+- How did critical functions evolve?
+- Where are the knowledge hotspots?
+- What patterns emerge over time?
+
+Traditional tools show **what changed**. CodeArchaeology reveals **why** and **how** it evolved.
+
+## 🔍 What CodeArchaeology Does
+
+### Discover Code Hotspots
+```bash
+codearch hotspots
+
+# Output:
+Top 10 Most Changed Files:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+1. src/auth/login.py        89 changes  ⚠️  HIGH RISK
+2. src/api/routes.py         67 changes  ⚠️  HIGH RISK
+3. src/models/user.py        45 changes  🔶 MODERATE
+
+Hotspot Analysis:
+- auth/login.py has been modified every week for 3 months
+- Indicates: Complex logic or frequent bugs
+- Last major refactor: 2 weeks ago
+```
+
+### Track Code Lineage
+```bash
+codearch lineage src/auth/login.py:authenticate
+
+# Shows complete evolution of a function:
+authenticate() Evolution Timeline:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2024-08-15: Initial implementation (simple password check)
+2024-09-03: Added JWT token generation
+2024-09-10: Added refresh token logic
+2024-09-15: REVERTED - token bug
+2024-09-16: Re-implemented with fix
+2024-10-01: Added 2FA support
+2024-11-01: Complete refactor (current)
+
+Complexity Trend: Simple → Complex → Simplified
+Stability: Unstable (3 reverts) → Stable (no changes 1mo)
+```
+
+### Find Abandoned Code
+```bash
+codearch abandoned
+
+# Discover dead experiments:
+Potentially Abandoned Code:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+src/experimental/new_cache.py
+  - Last modified: 6 months ago
+  - Created with 5 commits in 1 week
+  - Then abandoned (no changes since)
+  - Never referenced in production code
+  - Recommendation: Archive or remove
+
+src/utils/old_parser.py
+  - Replaced by new_parser.py 3 months ago
+  - Still in codebase but unused
+  - Recommendation: Safe to delete
+```
+
+### Analyze Patterns
+```bash
+codearch patterns
+
+# Uncover development patterns:
+Bug Fix Patterns:
+- Authentication bugs: Peak on Monday mornings
+- Database errors: Increase after schema changes
+- API errors: Correlate with new feature releases
+
+Refactoring Patterns:
+- Large refactors happen every 2-3 months
+- Pre-refactor: 2 week spike in bug fixes
+- Post-refactor: 40% reduction in changes
+
+Developer Patterns:
+- Alice: Focuses on new features (75% feature commits)
+- Bob: Focuses on bugs (60% bugfix commits)
+- Team: Refactors together (pair programming detected)
+```
+
+### Visualize Evolution
+```bash
+codearch visualize src/auth/
+
+# Creates visual timeline:
+Authentication Module Evolution (12 months)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Aug  ████░░░░  Initial implementation
+Sep  ██████░░  Rapid feature additions
+Oct  ████████  Peak complexity (bug fixes)
+Nov  ███░░░░░  Stabilization
+Dec  ██░░░░░░  Maintenance only
+Jan  ███░░░░░  Minor updates
+Feb  ████████  Major refactor
+Mar  ██░░░░░░  Stable
+```
+
+## ✨ Key Features
+
+### Historical Analysis
+- **Code Churn**: Identify unstable code that changes frequently
+- **Age Mapping**: Visualize code age across your codebase
+- **Evolution Tracking**: See how functions/classes evolved
+- **Complexity Trends**: Track complexity over time
+
+### Pattern Detection
+- **Bug Patterns**: When and where bugs typically occur
+- **Refactoring Cycles**: Identify refactoring patterns
+- **Developer Behaviors**: Understand team working patterns
+- **Temporal Coupling**: Find files that change together
+
+### Risk Assessment
+- **Hotspot Detection**: Find fragile code
+- **Knowledge Silos**: Identify single-person dependencies
+- **Legacy Code**: Discover old, unmaintained code
+- **Technical Debt**: Quantify code quality trends
+
+### Code Insights
+- **Abandoned Experiments**: Find dead code branches
+- **Successful Patterns**: Learn what works
+- **Failure Analysis**: Understand what didn't work
+- **Best Practices**: Extract patterns from stable code
+
+## 🚀 Quick Start
+
+### Installation
+```bash
+cd codearchaeology
+pip install -e .
+```
+
+### Basic Usage
+
+```bash
+# Initialize in your repo
+codearch init
+
+# Find hotspots (most changed files)
+codearch hotspots
+
+# Analyze specific file's history
+codearch lineage src/important.py
+
+# Find abandoned code
+codearch abandoned --since 6months
+
+# Detect patterns
+codearch patterns --type bugs
+
+# Visualize evolution
+codearch visualize src/
+
+# Get insights report
+codearch insights --output report.html
+```
+
+## 📊 Analysis Types
+
+### 1. Hotspot Analysis
+Identifies code that changes frequently - often indicating:
+- Complex business logic
+- Frequent bugs
+- Poor design
+- Missing tests
+
+```bash
+codearch hotspots --threshold 50 --period 6months
+```
+
+### 2. Code Lineage
+Tracks how specific code evolved:
+- Function implementations
+- Class structures
+- API contracts
+- Algorithm changes
+
+```bash
+codearch lineage src/core.py:calculate
+```
+
+### 3. Temporal Coupling
+Finds files that change together:
+- Hidden dependencies
+- Architectural coupling
+- Related concerns
+
+```bash
+codearch coupling --threshold 0.7
+```
+
+### 4. Knowledge Distribution
+Shows who knows what:
+- Code ownership
+- Knowledge silos
+- Bus factor
+- Onboarding insights
+
+```bash
+codearch knowledge
+```
+
+### 5. Complexity Evolution
+Tracks code complexity over time:
+- Cyclomatic complexity
+- Lines of code
+- Coupling metrics
+- Trend analysis
+
+```bash
+codearch complexity src/auth/ --timeline
+```
+
+### 6. Abandoned Code
+Finds potentially dead code:
+- Old experiments
+- Replaced implementations
+- Unused utilities
+- Safe-to-delete candidates
+
+```bash
+codearch abandoned --age 6months
+```
+
+## 🎯 Use Cases
+
+### 1. Onboarding New Developers
+```bash
+# Show them the important areas
+codearch hotspots
+codearch knowledge
+
+# Give them historical context
+codearch lineage src/main.py
+```
+
+### 2. Technical Debt Assessment
+```bash
+# Find problematic areas
+codearch hotspots --high-risk
+codearch complexity --increasing
+
+# Generate report
+codearch insights --output debt-report.html
+```
+
+### 3. Refactoring Planning
+```bash
+# Find candidates for refactoring
+codearch hotspots
+codearch coupling
+
+# Understand impact
+codearch lineage src/target.py
+```
+
+### 4. Code Reviews
+```bash
+# Historical context during reviews
+codearch lineage src/changed.py
+
+# Check if it's a hotspot
+codearch hotspots --file src/changed.py
+```
+
+### 5. Post-Mortems
+```bash
+# Understand bug patterns
+codearch patterns --type bugs --file src/buggy.py
+
+# See evolution leading to issue
+codearch lineage src/buggy.py:buggy_function
+```
+
+### 6. Architecture Assessment
+```bash
+# Find architectural coupling
+codearch coupling
+
+# Visualize module evolution
+codearch visualize src/ --by-module
+```
+
+## 📈 Metrics Explained
+
+### Churn Rate
+**What**: How often code changes
+**High Churn**: Indicates instability or active development
+**Low Churn**: Indicates stability or abandonment
+
+### Complexity Score
+**What**: How complex the code is
+**Increasing**: May indicate accumulating technical debt
+**Decreasing**: May indicate successful refactoring
+
+### Coupling Score
+**What**: How often files change together
+**High Coupling**: May indicate hidden dependencies
+**Low Coupling**: Indicates good separation of concerns
+
+### Knowledge Concentration
+**What**: How many people touch the code
+**High Concentration**: Bus factor risk
+**Low Concentration**: Good knowledge distribution
+
+### Age
+**What**: Time since last modification
+**Very Old**: May be stable or abandoned
+**Very New**: May be unstable or in active development
+
+## 🔧 Configuration
+
+Create `.codearch.json`:
+
+```json
+{
+  "analysis": {
+    "hotspot_threshold": 10,
+    "abandoned_age_months": 6,
+    "coupling_threshold": 0.7
+  },
+  "exclude": [
+    "tests/",
+    "migrations/",
+    "*.min.js"
+  ],
+  "authors": {
+    "map": {
+      "alice@old.com": "alice@new.com"
+    }
+  },
+  "visualization": {
+    "timeline_months": 12,
+    "complexity_metrics": ["cyclomatic", "lines"]
+  }
+}
+```
+
+## 💡 Pro Tips
+
+### Finding Bug-Prone Code
+```bash
+# Combine hotspots with recent bugs
+codearch hotspots --with-bugs
+```
+
+### Understanding Team Dynamics
+```bash
+# See collaboration patterns
+codearch knowledge --collaboration
+```
+
+### Planning Refactoring
+```bash
+# Find high-value refactoring targets
+codearch hotspots --complexity high
+```
+
+### Cleaning Up
+```bash
+# Find safe-to-delete code
+codearch abandoned --unreferenced
+```
+
+## 📊 Example Report
+
+```
+Code Archaeology Report - MyProject
+Generated: November 6, 2025
+
+=== HOTSPOTS ===
+Top Risk Areas:
+1. auth/login.py - 89 changes, last modified yesterday
+   ⚠️  High risk: Changed weekly for 3 months
+
+2. api/routes.py - 67 changes, stable for 2 weeks
+   🔶 Moderate risk: Was unstable, now stabilizing
+
+=== PATTERNS ===
+Bug Fix Patterns:
+- 60% of bugs in files changed >20 times
+- Bugs cluster around major features
+- Post-release bug spikes
+
+=== INSIGHTS ===
+- Consider refactoring auth module
+- Good test coverage correlates with stability
+- Pair programming reduces hotspots by 40%
+
+=== RECOMMENDATIONS ===
+1. Refactor auth/login.py (highest risk)
+2. Archive 3 abandoned experimental files
+3. Document api/routes.py (knowledge silo)
+```
+
+## 🛠️ Technology Stack
+
+- **Git Analysis**: GitPython for repository analysis
+- **Metrics**: Custom algorithms for complexity and coupling
+- **Visualization**: Rich for terminal, matplotlib for graphs
+- **Storage**: SQLite for caching analysis results
+- **CLI**: Click for command interface
+
+## 🎯 Perfect For
+
+- **Tech Leads**: Understanding codebase health
+- **Architects**: Identifying coupling and dependencies
+- **Managers**: Assessing technical debt
+- **Developers**: Learning from code history
+- **Teams**: Improving code quality
+- **Auditors**: Risk assessment
+
+## 🤝 Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md)
+
+## 📄 License
+
+MIT License - See [LICENSE](LICENSE)
+
+---
+
+**Dig into your code's past to build a better future** 🏛️✨

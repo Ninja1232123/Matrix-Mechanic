@@ -1,0 +1,2 @@
+[console_scripts]
+debug-companion = ai_debug_companion.cli:main
