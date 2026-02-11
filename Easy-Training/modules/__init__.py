@@ -15,7 +15,7 @@ import importlib.util
 from pathlib import Path
 from typing import Dict, List, Callable, Any, Optional
 
-# Registry of loaded modules
+# Registry of loaded modules.
 _modules: Dict[str, dict] = {}
 
 
