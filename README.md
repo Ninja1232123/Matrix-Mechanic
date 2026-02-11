@@ -4,7 +4,7 @@
     
                              I'm holding the flavor of sovereignty.
               
-               🔥 **Hotdog AI is the difference between a wiener and a hotdog**🔥
+               🔥 **Hotdog AI is the difference between a wiener and a hotdog**  🔥
 
     A wiener is just meat. A hotdog is cuisine. It's flavor. It's craft. It's artistry. It's meaning.
 
