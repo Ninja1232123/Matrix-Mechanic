@@ -1,4 +1,4 @@
-# Archive: Base10 / Multichannel Components
+###AI TRAINING FOR DUMDUMS
 
 This directory contains the original AI-Training-For-DumDums codebase components that were not part of the π/2 quantization focus.
 
