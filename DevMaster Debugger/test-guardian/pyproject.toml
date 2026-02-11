@@ -1,0 +1,69 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "test-guardian"
+version = "1.0.0"
+description = "Automatic test generation for Python code"
+readme = "README.md"
+requires-python = ">=3.8"
+license = {text = "MIT"}
+authors = [
+    {name = "Codes-Masterpiece", email = "codes@masterpiece.dev"}
+]
+keywords = ["testing", "test-generation", "pytest", "unittest", "automation"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Topic :: Software Development :: Testing",
+]
+
+dependencies = [
+    "click>=8.0.0",
+    "rich>=13.0.0",
+    "pytest>=7.0.0",
+    "coverage>=7.0.0",
+    "jinja2>=3.0.0",
+    "black>=23.0.0",
+    "hypothesis>=6.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-cov>=4.0.0",
+    "mypy>=1.0.0",
+    "ruff>=0.1.0",
+]
+
+[project.scripts]
+test-guardian = "test_guardian.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/Ninja1232123/Codes-Masterpiece"
+Documentation = "https://github.com/Ninja1232123/Codes-Masterpiece/tree/main/test-guardian"
+Repository = "https://github.com/Ninja1232123/Codes-Masterpiece"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["test_guardian*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = "test_*.py"
+python_functions = "test_*"
+
+[tool.coverage.run]
+source = ["test_guardian"]
+omit = ["*/tests/*", "*/test_*"]
+
+[tool.black]
+line-length = 100
+target-version = ['py38', 'py39', 'py310', 'py311']
