@@ -23,14 +23,6 @@ Original data generation and encoding scripts:
 ### tests/
 Original test suite for the full application
 
-### Union Break/
-Experimental philosophical scripts (30+ files):
-- Consciousness exploration
-- Dream simulation
-- Paradox engines
-- Meta-level reasoning
-- Various AI cognition experiments
-
 ## Why Archived?
 
 The main project was refactored to focus specifically on π/2 quantization training. These components represent the base10/multichannel training paradigm and experimental features that aren't needed for the simplified π/2 app.
