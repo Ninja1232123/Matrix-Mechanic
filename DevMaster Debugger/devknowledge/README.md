@@ -1,0 +1,263 @@
+# DevKnowledge - Local-First Knowledge Graph for Developers
+
+A powerful, privacy-first knowledge management system that understands code. Store notes, snippets, and documentation locally with automatic semantic linking powered by embeddings.
+
+## 🌟 Features
+
+### Core Capabilities
+- **100% Local**: All data stays on your machine, no cloud required
+- **Semantic Search**: Find related content using natural language or code
+- **Auto-Linking**: Automatically discovers connections between notes and code
+- **Multi-Language**: Understands Python, JavaScript, Go, Rust, Java, and more
+- **Code-Aware**: Parses code syntax, extracts functions, classes, and concepts
+- **Fast**: Vector search with SQLite for blazing-fast queries
+
+### Advanced Features
+- **Smart Tags**: Auto-generates tags from content and code
+- **Backlinks**: See what references each note
+- **Graph View**: Visualize your knowledge network
+- **Snippets**: Save and search code snippets with context
+- **Embeddings**: Uses sentence transformers for semantic understanding
+
+## 🏗️ Architecture
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                     CLI/TUI Interface                        │
+│         (Search, Browse, Edit, Visualize)                    │
+└───────────────────────┬─────────────────────────────────────┘
+                        │
+┌───────────────────────┴─────────────────────────────────────┐
+│                  Knowledge Graph Engine                      │
+│         (Query, Link Discovery, Graph Traversal)             │
+└─┬──────────┬──────────┬────────────┬────────────────────────┘
+  │          │          │            │
+┌─▼────────┐ ┌▼────────┐ ┌▼─────────┐ ┌▼───────────────────┐
+│ Document │ │Embedding│ │  Vector  │ │   Code Parser      │
+│ Storage  │ │ Engine  │ │  Search  │ │   & Analyzer       │
+│          │ │         │ │          │ │                    │
+│ - Notes  │ │ - Model │ │ - Cosine │ │ - AST Extraction   │
+│ - Code   │ │ - Cache │ │ - KNN    │ │ - Symbol Detection │
+│ - Docs   │ │ - Batch │ │ - Hybrid │ │ - Language Support │
+│ - Tags   │ │         │ │          │ │ - Code Context     │
+└──────────┘ └─────────┘ └──────────┘ └────────────────────┘
+     │
+┌────▼──────────────────────────────────────────────────────┐
+│              SQLite Database                               │
+│  (Documents, Embeddings, Links, Tags, Metadata)           │
+└────────────────────────────────────────────────────────────┘
+```
+
+## 🚀 Quick Start
+
+### Installation
+
+```bash
+cd devknowledge
+pip install -e .
+```
+
+### Basic Usage
+
+```bash
+# Initialize a knowledge base
+dk init
+
+# Add a note
+dk add note "REST API Design" --content "Use HTTP verbs correctly..."
+
+# Add a code snippet
+dk add code python "Quick sort implementation" < quicksort.py
+
+# Search semantically
+dk search "how to sort arrays efficiently"
+
+# Find related content
+dk related "REST API Design"
+
+# Browse in TUI
+dk browse
+
+# Show graph stats
+dk stats
+```
+
+## 📚 Use Cases
+
+### 1. Developer Notes
+Store learnings, gotchas, and solutions you discover:
+```bash
+dk add note "Python asyncio pitfall" --tags python,async --content \
+  "Remember: you can't use await outside async functions"
+```
+
+### 2. Code Snippets
+Save reusable code with context:
+```bash
+dk add code javascript "React custom hook" < useLocalStorage.js
+```
+
+### 3. Documentation
+Keep important docs searchable:
+```bash
+dk add doc "Kubernetes deployment guide" --url https://k8s.io/docs/...
+```
+
+### 4. Learning
+Build your personal knowledge graph while learning:
+```bash
+# Add concept
+dk add note "Mutex vs Semaphore"
+
+# System auto-links to related notes about concurrency
+dk related "Mutex vs Semaphore"
+# Shows: "Thread Safety", "Race Conditions", "Deadlock Prevention"
+```
+
+## 🔍 Search Modes
+
+### Semantic Search
+Finds conceptually similar content:
+```bash
+dk search "error handling patterns"
+# Returns: notes about try/catch, Result types, Option types, etc.
+```
+
+### Code Search
+Understands code structure:
+```bash
+dk search "function that parses JSON" --type code
+# Finds: code snippets with JSON parsing logic
+```
+
+### Tag Search
+Traditional tag-based filtering:
+```bash
+dk search --tags python,async,performance
+```
+
+### Graph Traversal
+Explore connections:
+```bash
+dk links "REST API Design"
+# Shows: incoming links (what references it) and outgoing links
+```
+
+## 🎯 Smart Features
+
+### Auto-Tagging
+Automatically extracts relevant tags from content:
+- Code: language, libraries, patterns
+- Notes: technologies, concepts, frameworks
+- Links: domains, topics
+
+### Link Discovery
+Finds connections based on:
+- Semantic similarity (embeddings)
+- Shared tags
+- Code dependencies
+- Explicit references
+
+### Code Understanding
+Extracts from code:
+- Functions and classes
+- Import statements
+- Documentation strings
+- Key algorithms
+
+## 💾 Storage
+
+Everything is stored in a single SQLite database:
+- **Documents**: Your notes, code, and docs
+- **Embeddings**: Vector representations for search
+- **Links**: Relationships between documents
+- **Tags**: Categorization and metadata
+- **History**: Edit history and versions
+
+Location: `~/.devknowledge/kb.db`
+
+## 🔧 Configuration
+
+Create `~/.devknowledge/config.json`:
+
+```json
+{
+  "embedding_model": "all-MiniLM-L6-v2",
+  "similarity_threshold": 0.7,
+  "max_links_per_doc": 10,
+  "auto_tag": true,
+  "languages": ["python", "javascript", "go", "rust"]
+}
+```
+
+## 🛠️ Technology Stack
+
+- **Storage**: SQLite with FTS5 for full-text search
+- **Embeddings**: Sentence Transformers (runs locally)
+- **Vector Search**: Custom implementation with numpy
+- **Code Parsing**: Tree-sitter for multi-language support
+- **TUI**: Textual framework
+- **CLI**: Click framework
+
+## 📊 Examples
+
+### Example: Building a Knowledge Base While Learning
+
+```bash
+# Day 1: Learning about distributed systems
+dk add note "CAP Theorem" --content "Consistency, Availability, Partition tolerance..."
+
+# Day 2: Related concept
+dk add note "Eventual Consistency" --content "Data will become consistent eventually..."
+
+# System auto-discovers link between CAP Theorem and Eventual Consistency
+
+# Day 3: Find all related concepts
+dk related "CAP Theorem"
+# Shows: Eventual Consistency, ACID, BASE, Consensus Algorithms...
+
+# View the graph
+dk graph "CAP Theorem" --depth 2
+```
+
+### Example: Code Snippet Library
+
+```bash
+# Save useful snippets
+dk add code python "Retry decorator" < retry.py
+dk add code python "LRU cache implementation" < lru.py
+
+# Later, search for it
+dk search "caching strategy" --type code
+# Finds the LRU cache and any notes about caching
+
+# See related snippets
+dk related "LRU cache implementation" --type code
+# Shows other cache implementations, performance notes, etc.
+```
+
+## 🎨 TUI Interface
+
+Launch the interactive browser:
+```bash
+dk browse
+```
+
+Features:
+- **Search panel**: Type to search in real-time
+- **Results panel**: Browse matching documents
+- **Preview panel**: View content with syntax highlighting
+- **Links panel**: Explore connections
+- **Graph view**: Visual network representation
+
+## 🤝 Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md)
+
+## 📄 License
+
+MIT License - See [LICENSE](LICENSE)
+
+---
+
+**Built for developers who want to own their knowledge** 🧠✨

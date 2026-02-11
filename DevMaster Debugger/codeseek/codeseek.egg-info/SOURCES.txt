@@ -1,0 +1,17 @@
+LICENSE
+README.md
+pyproject.toml
+codeseek/__init__.py
+codeseek/cli.py
+codeseek/embeddings.py
+codeseek/indexer.py
+codeseek/models.py
+codeseek/parser.py
+codeseek/search.py
+codeseek/storage.py
+codeseek.egg-info/PKG-INFO
+codeseek.egg-info/SOURCES.txt
+codeseek.egg-info/dependency_links.txt
+codeseek.egg-info/entry_points.txt
+codeseek.egg-info/requires.txt
+codeseek.egg-info/top_level.txt

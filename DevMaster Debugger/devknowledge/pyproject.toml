@@ -1,0 +1,42 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "devknowledge"
+version = "0.1.0"
+description = "Local-first knowledge graph for developers with semantic search and code understanding"
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [
+    {name = "DevKnowledge Team"}
+]
+dependencies = [
+    "textual>=0.47.0",
+    "click>=8.1.7",
+    "sentence-transformers>=2.2.0",
+    "numpy>=1.24.0",
+    "tree-sitter>=0.20.0",
+    "tree-sitter-python>=0.20.0",
+    "tree-sitter-javascript>=0.20.0",
+    "pydantic>=2.5.0",
+    "rich>=13.7.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.4.3",
+    "black>=23.12.0",
+    "ruff>=0.1.8",
+]
+
+[project.scripts]
+dk = "devknowledge.cli:main"
+
+[tool.black]
+line-length = 100
+target-version = ['py310']
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"

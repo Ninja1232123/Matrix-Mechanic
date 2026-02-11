@@ -1,0 +1,2 @@
+[console_scripts]
+dk = devknowledge.cli:main
